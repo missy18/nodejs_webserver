@@ -46,12 +46,12 @@ var server = http.createServer();
 server.on('request',
     function (request, response) {
         console.log('Requested Url:' + request.url);
-        var requestedFile = '/htdocs' + request.url;
+        var requestedFile = request.url;
         requestedFile = (requestedFile.substring(requestedFile.length - 1, 1) === '/') ? requestedFile + DEFAULT_FILE : requestedFile;
         console.log('Handle Url:' + requestedFile);
         console.log('File Extention:' + getExtension(requestedFile));
         console.log('Content-Type:' + getContentType(requestedFile));
-        fs.readFile('.' + requestedFile, 'binary', function (err, data) {
+        fs.readFile('/htdocs' + requestedFile, 'binary', function (err, data) {
             if (err) {
                 response.writeHead(404, {
                     'Content-Type': 'text/plain'
