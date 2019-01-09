@@ -47,10 +47,7 @@ server.on('request',
         var requestedFile = request.url;
         console.log('Requested Url Length:' + requestedFile.length);
         // ルートのときと、それ以外のときの'/'終わり、ファイル名までのアクセスで処理をわける
-        if () { 
-
-        }
-        requestedFile = (requestedFile.substring(requestedFile.length - 1, 1) === '/') ? requestedFile + DEFAULT_FILE : requestedFile;
+        requestedFile = (requestedFile.slice(-1) === '/') ? requestedFile + DEFAULT_FILE : requestedFile;
         console.log('Handle Url:' + requestedFile);
         console.log('File Extention:' + getExtension(requestedFile));
         console.log('Content-Type:' + getContentType(requestedFile));
