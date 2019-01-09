@@ -1,0 +1,225 @@
+@charset "utf-8";
+
+/*--------------------basic settings---------------------*/
+
+
+body {
+    font-family: $fontfamily;
+    font-size: $default_fontsize;
+    // *font-size: 100%;	//forIE6-7
+    line-height: $default_lineheight;
+    color: $color;
+    text-align: center;
+    background-color: #fff;
+    -webkit-text-size-adjust: 100%;
+    margin: 0 auto;
+    min-width: $pc_width;
+    height: 100%;
+
+    @include mediaquery() {
+    }
+}
+
+
+/*-----heading-----*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: $default_fontsize;
+    margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+dt,
+label {
+    -webkit-font-smoothing: antialiased;
+    @include font-feature-settings("kern", "liga", "palt");
+    text-rendering: optimizelegibility;
+}
+
+/*-----paragraph-----*/
+p {
+    margin: 0;
+}
+
+/*-----lists-----*/
+ul,
+ol,
+dl,
+dl dt,
+dl dd {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+ul,
+ol {
+    li {
+        //margin-bottom: 0.5em;
+    }
+}
+
+dl {
+    dt {
+        font-weight: bold;
+    }
+}
+
+
+/*-----table-----*/
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/*-----horizontal line-----*/
+hr {
+    border: 0;
+    border-top: 1px solid $theme_color;
+    display: block;
+    margin: 0;
+    padding: 0;
+    height: 0;
+}
+
+/*-----quote-----*/
+blockquote,
+q {
+    quotes: none;
+
+    &:before,
+    &:after {
+        content: "";
+        content: none;
+    }
+}
+blockquote {
+    margin: 1.5em 1em;
+}
+
+/*-----anchor-----*/
+a {
+    color: $theme_color;
+
+
+    &:hover {
+        color: #808080;
+        text-decoration: underline;
+    }
+}
+
+/*-----strong/emphasis-----*/
+strong {
+    font-weight: bold;
+}
+em {
+    font-style: normal;
+}
+
+/*-----mark-----
+mark{
+	background-color: #ff9;
+	font-style: italic;
+	font-weight: bold;
+	color: #000;
+}*/
+
+/*-----insert/delete-----
+ins{
+	background-color: #ff9;
+	color: #000;
+	text-decoration: none;
+}
+del{ text-decoration: line-through;}*/
+
+/*-----abbreviation/acronym/definition-----*/
+abbr[title],
+acronym[title],
+dfn[title] {
+    text-decoration: underline;
+    border-bottom: 0;
+    cursor: help;
+}
+
+/*-----preformatted text-----*/
+code,
+kbd,
+pre,
+samp {
+    font-size: $default_fontsize;
+}
+
+pre {
+    border: 1px solid #e0e0e0;
+    background-color: #fcfcfc;
+    margin: 1.75em 0;
+    padding: fitText() 2em;
+}
+
+/*-----small-----*/
+small {
+    font-size: $default_fontsize;
+}
+
+/*-----address-----*/
+address {
+    font-style: normal;
+}
+
+/*-----image-----*/
+img {
+    font-family: sans-serif;
+    line-height: 1;
+    vertical-align: bottom;
+    border: none;
+    -ms-interpolation-mode: bicubic;
+}
+
+/*-----media-----*/
+embed,
+iframe,
+object,
+video {
+    max-width: 100%;
+}
+
+/*-----form parts-----*/
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="checkbox"],
+input[type="radio"],
+input[type="submit"],
+input[type="image"],
+input[type="button"],
+textarea,
+select {
+    font-family: $fontfamily;
+    font-size: $default_fontsize;
+    line-height: $default_lineheight;
+    vertical-align: middle;
+    margin: fitText() 0;
+}
+
+
+
+input[type="file"] {
+    font: static;
+}

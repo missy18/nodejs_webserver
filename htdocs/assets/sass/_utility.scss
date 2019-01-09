@@ -1,0 +1,193 @@
+@charset "utf-8";
+
+//-----variables configuration-----
+//ヒラギノ角ゴ Pro W3, Hiragino Kaku Gothic Pro, Meiryo, Helvetica, sans-serif;
+$fontfamily:\30d2 \30e9 \30ae \30ce \89d2 \30b4 \20 \50 \72 \6f \20 \57 \33 , Hiragino Kaku Gothic Pro, Meiryo, Helvetica, sans-serif;
+//ヒラギノ明朝 Pro W6, Hiragino Mincho Pro, HGS明朝E, ＭＳ Ｐ明朝, serif;
+$fontfamily2:\30d2 \30e9 \30ae \30ce \660e \671d \20 \50 \72 \6f \20 \57 \36 , Hiragino Mincho Pro , \48 \47 \53 \660e \671d \45 , \ff2d \ff33 \20 \ff30 \660e \671d , serif;
+
+$color: #2b2b2b;
+$default_fontsize: 14px;
+$default_lineheight: (26 / 14);
+$line_padding: ($default_lineheight - 1) / 2 + em;
+$line_margin: round(($default_fontsize * $default_lineheight - $default_fontsize) / 2);
+
+$mobile_width: 320px;
+$portrait_width: $mobile_width;
+$landscape_width: 736px;
+
+$pc_width: 980px;
+$pc_min-width: $landscape_width + 1;
+
+$mediaquery_condition: "max-width:" + $landscape_width;
+
+$theme_color: #2b2b2b;	//link color
+$theme_color2: #2b2b2b;	//border color
+$base_margin: 10px;
+$opacity: 0.75;
+
+$prefix: -webkit-, -moz-, -ms-, -o-, '';
+
+$img_dir: "/wp-content/themes/imagica/images/";
+
+
+//-----functions-----
+//bgPosV
+//get background-postion vertical value
+@function bgPosV($fontsize, $imgheight, $lineheight:$default_lineheight){
+	@return (($fontsize * $lineheight - $imgheight) / 2)/$fontsize + em;
+}
+
+//retinaImg
+//get image size for retina
+@function retinaImg($value){
+	@return round($value / 2);
+}
+
+//fitText
+//inline block to fit the text
+@function fitText($fontsize:$default_fontsize, $lineheight:$default_lineheight){
+	@return ($fontsize * $lineheight - $fontsize) / 2;
+}
+
+//excludePrefix
+@function excludePrefix($excludes){
+	@if($excludes != false){
+		$tmp:();
+		@each $v in $prefix{
+			$n:index($excludes, $v);
+			@if($n==false){
+				$tmp:join($tmp, $v);
+			}
+		}
+		@return $tmp;
+	}@else{
+		@return $prefix;
+	}
+}
+
+
+//-----mixins-----
+//joinPrefix
+@mixin joinPrefix($property, $value, $excludes){
+	@if($excludes != false){
+		$tmp:();
+		@each $v in $prefix{
+			$n:index($excludes, $v);
+			@if($n==false){
+				$tmp:join($tmp, $v);
+			}
+		}
+		@each $v in $tmp{
+			#{$v + unquote($property)}:unquote($value);
+		}
+	}@else{
+		@each $v in $prefix{
+			#{$v + unquote($property)}:unquote($value);
+		}
+	}
+}
+
+//box_shadow
+@mixin box_shadow($value, $excludes:false){
+	$use_prefix:excludePrefix($excludes);
+	@each $v in $use_prefix{
+		#{$v}box-shadow:unquote($value);
+	}
+}
+
+//transition
+@mixin transition($value, $excludes:false){
+	$use_prefix:excludePrefix($excludes);
+	@each $v in $use_prefix{
+		#{$v}transition:unquote($value);
+	}
+}
+
+//transform_style
+@mixin transform_style($value, $excludes:false){
+	$use_prefix:excludePrefix($excludes);
+	@each $v in $use_prefix{
+		#{$v}transform-style:unquote($value);
+	}
+}
+
+//display_flex
+@mixin display_flex($value:"flex", $excludes:false){
+	$use_prefix:excludePrefix($excludes);
+	@each $v in $use_prefix{
+		display:#{$v}unquote($value);
+	}
+}
+
+//box_flex
+@mixin box_flex($value, $excludes:false){
+	$use_prefix:excludePrefix($excludes);
+	@each $v in $use_prefix{
+		#{$v}box-flex:unquote($value);
+	}
+}
+
+//box_sizing
+@mixin box_sizing($value, $excludes:false){
+	$use_prefix:excludePrefix($excludes);
+	@each $v in $use_prefix{
+		#{$v}box-sizing:unquote($value);
+	}
+}
+
+//bg_size
+@mixin bg_size($value, $excludes:false){
+	$use_prefix:excludePrefix($excludes);
+	@each $v in $use_prefix{
+		#{$v}background-size:unquote($value);
+	}
+}
+
+//mediaquery
+@mixin mediaquery($condition:$mediaquery_condition) {
+	@media screen and ($condition){
+		@content;
+	}
+}
+
+
+//-----add-ons-----
+/*clearfix*/
+.clearfix{
+	@include clearfix;
+}
+
+.clearfixLegacy{
+	_overflow:visible;
+	_height:1px;
+	zoom:1;
+
+	&:after{
+		content:".";
+		display:block;
+		visibility:hidden;
+		clear:both;
+		height:0px;
+		font-size:0px;
+	}
+}
+
+//input text style
+@mixin input_text_style(){
+	@include appearance(none);
+	font-size: em(16,$default_fontsize);
+	border: 1px solid $theme_color2;
+	background-color: #fff;
+	// border-radius: 4px;
+	// @include box-shadow(1px 2px 4px rgba(0, 0, 0, .1) inset);
+	@include box_sizing("border-box");
+}
+
+//background propaties with background-size
+@mixin bg($url, $position, $repeat, $size){
+	background-image:$url;
+	background-position:$position;
+	background-repeat:$repeat;
+	background-size:$size;
+}

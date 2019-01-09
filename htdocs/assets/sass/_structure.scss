@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+/*--------------------structure setting---------------------*/
+/*----------html----------*/
+html{
+	&.no-js{}
+	&.lt-ie9{}	//IE9未満
+}
+
+
+
+/*----------body----------*/
+body{}
+
+
+
+/*----------pageWrapper----------*/
+.pageWrapper{
+@include mediaquery(){}
+}
+
+
+
+/*----------pageHeader----------*/
+.pageHeader{
+@include mediaquery(){}
+}
+
+/*----------pageContent----------*/
+.pageContent{
+@include mediaquery(){}
+}
+
+
+
+/*----------pageFooter----------*/
+.pageFooter{
+@include mediaquery(){}
+}
